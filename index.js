@@ -348,9 +348,9 @@ exports.importPublic = function (publicKey) {
  * @param {Number} [chainId]
  * @return {Object}
  */
-exports.ecsign = function (msgHash, privateKey, chainId) {
-  const sig = secp256k1.sign(msgHash, privateKey)
-
+exports.ecsign = async function (msgHash, privateKey, chainId) {
+  //const sig = secp256k1.sign(msgHash, privateKey)
+  const sig = await window.keywalletService.ecsign(msgHash)
   const ret = {}
   ret.r = sig.signature.slice(0, 32)
   ret.s = sig.signature.slice(32, 64)
